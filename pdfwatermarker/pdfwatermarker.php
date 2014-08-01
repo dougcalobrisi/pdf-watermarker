@@ -67,16 +67,17 @@ class PDFWatermarker {
 			$orientation = "P";
 		}
 		
-		$this->_tempPdf->addPage("P",array($templateDimension['w'],$templateDimension['h']));
+		$this->_tempPdf->addPage($orientation, array($templateDimension['w'],$templateDimension['h']));
 		$this->_tempPdf->useTemplate($templateId);
 		
 		$wWidth = ($this->_watermark->getWidth() / 96) * 25.4; //in mm
 		$wHeight = ($this->_watermark->getHeight() / 96) * 25.4; //in mm
 		
 		$watermarkPosition = $this->_determineWatermarkPosition( 	$wWidth, 
-																	$wHeight, 
-																	$templateDimension['w'], 
-																	$templateDimension['h']);
+										$wHeight, 
+										$templateDimension['w'], 
+										$templateDimension['h']);
+
 		$this->_tempPdf->Image($this->_watermark->getFilePath(),$watermarkPosition[0],$watermarkPosition[1],-96);
 	}
 	
